@@ -1,17 +1,18 @@
+import Foundation
 
 protocol StackProtocol {
     associatedtype Element
     
     var isEmpty: Bool { get }
     var count: Int { get }
-    var peek: Element? { get }
+    var top: Element? { get }
     
-    func push(element: Element)
-    @discardableResult func pop() -> Element?
+    mutating func push(element: Element)
+    mutating func pop() -> Element?
 }
 
-class Stack<T>: StackProtocol {
-    private var stackArray: [T] = []
+struct Stack<Element>: StackProtocol {
+    private var stackArray: [Element] = []
     
     var isEmpty: Bool {
         return stackArray.isEmpty
@@ -21,16 +22,16 @@ class Stack<T>: StackProtocol {
         return stackArray.count
     }
     
-    var peek: T? {
+    var top: Element? {
         return stackArray.last
     }
     
-    func push(element: T) {
+    mutating func push(element: Element) {
         stackArray.append(element)
     }
     
-    
-    func pop() -> T? {
+    @discardableResult
+    mutating func pop() -> Element? {
         return stackArray.removeLast()
     }
     
@@ -49,7 +50,7 @@ extension Stack: CustomStringConvertible {
 
 
 
-//let stack = Stack<Int>()
+//var stack = Stack<Int>()
 //stack.push(element: 5)
 //stack.push(element: 3)
 //stack.push(element: 6)
@@ -57,7 +58,7 @@ extension Stack: CustomStringConvertible {
 //
 //print(stack)
 //
-//print("last : \(stack.peek!)")
+//print("last : \(stack.top!)")
 //
 //
 //stack.pop()
@@ -67,7 +68,7 @@ extension Stack: CustomStringConvertible {
 
 
 
-let stack = Stack<String>()
+var stack = Stack<String>()
 stack.push(element: "ONE")
 stack.push(element: "TWO")
 stack.push(element: "THREE")
@@ -75,7 +76,7 @@ stack.push(element: "FOUR")
 
 print(stack)
 
-print("last : \(stack.peek!)")
+print("last : \(stack.top!)")
 
 
 stack.pop()
