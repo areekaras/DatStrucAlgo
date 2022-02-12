@@ -57,6 +57,17 @@ class StackTests: XCTestCase {
         XCTAssertEqual(sut.peek(), 1)
     }
     
+    func test_push_insertsValuesIntoStack() {
+        var sut = makeSUT()
+        
+        sut.push(1)
+        sut.push(2)
+        
+        XCTAssertEqual(sut.isEmpty, false)
+        XCTAssertEqual(sut.count, 2)
+        XCTAssertEqual(sut.peek(), 2)
+    }
+    
     //MARK: - Helpers
     private func makeSUT() -> Stack<Int> {
         return Stack<Int>()
