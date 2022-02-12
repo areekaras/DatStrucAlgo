@@ -42,9 +42,7 @@ class StackTests: XCTestCase {
     func test_init_deliversEmptyStack() {
         let sut = makeSUT()
         
-        XCTAssertEqual(sut.isEmpty, true)
-        XCTAssertEqual(sut.count, 0)
-        XCTAssertEqual(sut.peek(), nil)
+        checkStackAssertions(sut, isEmpty: true, count: 0, expectedPeek: nil)
     }
     
     func test_push_insertsValueIntoStack() {
@@ -52,9 +50,7 @@ class StackTests: XCTestCase {
         
         sut.push(1)
         
-        XCTAssertEqual(sut.isEmpty, false)
-        XCTAssertEqual(sut.count, 1)
-        XCTAssertEqual(sut.peek(), 1)
+        checkStackAssertions(sut, isEmpty: false, count: 1, expectedPeek: 2)
     }
     
     func test_push_insertsValuesIntoStack() {
@@ -63,14 +59,19 @@ class StackTests: XCTestCase {
         sut.push(1)
         sut.push(2)
         
-        XCTAssertEqual(sut.isEmpty, false)
-        XCTAssertEqual(sut.count, 2)
-        XCTAssertEqual(sut.peek(), 2)
+        checkStackAssertions(sut, isEmpty: false, count: 2, expectedPeek: 2)
     }
     
     //MARK: - Helpers
     private func makeSUT() -> Stack<Int> {
         return Stack<Int>()
+    }
+    
+    //file and line is not working in playgrond
+    private func checkStackAssertions(_ sut: Stack<Int>, isEmpty: Bool, count: Int, expectedPeek: Int?, file: StaticString = #filePath, line: UInt = #line) {
+        XCTAssertEqual(sut.isEmpty, isEmpty, file: file, line: line)
+        XCTAssertEqual(sut.count, count, file: file, line: line)
+        XCTAssertEqual(sut.peek(), expectedPeek, file: file, line: line)
     }
 }
 
