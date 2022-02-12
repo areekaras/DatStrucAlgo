@@ -1,13 +1,27 @@
 import Foundation
 import XCTest
 
-
+protocol StackProtocol {
+    associatedtype Element
+    
+    var isEmpty: Bool { get }
+    var count: Int { get }
+    
+    func push(_ element: Element)
+    func pop() -> Element?
+    func peek() -> Element?
+}
 
 
 
 
 class StackTests: XCTestCase {
-    
+    func test_init_deliversEmptyStack() {
+        
+//        XCTAssertEqual(sut.isEmpty, true)
+//        XCTAssertEqual(sut.count, 0)
+//        XCTAssertEqual(sut.peek(), nil)
+    }
 }
 
 StackTests.defaultTestSuite.run()
