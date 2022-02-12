@@ -7,20 +7,44 @@ protocol StackProtocol {
     var isEmpty: Bool { get }
     var count: Int { get }
     
-    func push(_ element: Element)
-    func pop() -> Element?
+    mutating func push(_ element: Element)
+    mutating func pop() -> Element?
     func peek() -> Element?
 }
 
+struct Stack<Element>: StackProtocol {
+    private let array = [Element]()
+    
+    var isEmpty: Bool {
+        return array.isEmpty
+    }
+    
+    var count: Int {
+        return array.count
+    }
+    
+    func push(_ element: Element) {
+    
+    }
+    
+    func pop() -> Element? {
+        return nil
+    }
+    
+    func peek() -> Element? {
+        return nil
+    }
+}
 
 
 
 class StackTests: XCTestCase {
     func test_init_deliversEmptyStack() {
+        let sut = Stack<Int>()
         
-//        XCTAssertEqual(sut.isEmpty, true)
-//        XCTAssertEqual(sut.count, 0)
-//        XCTAssertEqual(sut.peek(), nil)
+        XCTAssertEqual(sut.isEmpty, true)
+        XCTAssertEqual(sut.count, 0)
+        XCTAssertEqual(sut.peek(), nil)
     }
 }
 
