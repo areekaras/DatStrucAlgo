@@ -40,7 +40,7 @@ struct Stack<Element>: StackProtocol {
 
 class StackTests: XCTestCase {
     func test_init_deliversEmptyStack() {
-        let sut = Stack<Int>()
+        let sut = makeSUT()
         
         XCTAssertEqual(sut.isEmpty, true)
         XCTAssertEqual(sut.count, 0)
@@ -48,7 +48,7 @@ class StackTests: XCTestCase {
     }
     
     func test_push_insertsValueIntoStack() {
-        var sut = Stack<Int>()
+        var sut = makeSUT()
         
         sut.push(1)
         
@@ -56,10 +56,14 @@ class StackTests: XCTestCase {
         XCTAssertEqual(sut.count, 1)
         XCTAssertEqual(sut.peek(), 1)
     }
+    
+    //MARK: - Helpers
+    private func makeSUT() -> Stack<Int> {
+        return Stack<Int>()
+    }
 }
 
 StackTests.defaultTestSuite.run()
-
 
 //Use cases
 
