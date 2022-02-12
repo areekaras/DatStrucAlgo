@@ -13,7 +13,7 @@ protocol StackProtocol {
 }
 
 struct Stack<Element>: StackProtocol {
-    private let array = [Element]()
+    private var array = [Element]()
     
     var isEmpty: Bool {
         return array.isEmpty
@@ -23,8 +23,8 @@ struct Stack<Element>: StackProtocol {
         return array.count
     }
     
-    func push(_ element: Element) {
-    
+    mutating func push(_ element: Element) {
+        array.append(element)
     }
     
     func pop() -> Element? {
@@ -32,7 +32,7 @@ struct Stack<Element>: StackProtocol {
     }
     
     func peek() -> Element? {
-        return nil
+        return array.last
     }
 }
 
@@ -45,6 +45,16 @@ class StackTests: XCTestCase {
         XCTAssertEqual(sut.isEmpty, true)
         XCTAssertEqual(sut.count, 0)
         XCTAssertEqual(sut.peek(), nil)
+    }
+    
+    func test_push_insertsValueIntoStack() {
+        var sut = Stack<Int>()
+        
+        sut.push(1)
+        
+        XCTAssertEqual(sut.isEmpty, false)
+        XCTAssertEqual(sut.count, 1)
+        XCTAssertEqual(sut.peek(), 1)
     }
 }
 
